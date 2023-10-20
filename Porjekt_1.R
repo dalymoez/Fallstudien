@@ -5,7 +5,10 @@ library("tidyverse")
 library("ggplot2")
 library("ineq")
 
+
+#### Aufgabe 4 ####
 #vorbereitung der Daten:
+kennzahlen <- read.csv("Kennzahlen_Laender.csv")
 emission_data <- daten_final3
 emission_data <- subset(emission_data,year>1989)
 emission_data_cleaned <- na.omit(emission_data)
@@ -81,6 +84,52 @@ p2 <- ggplot(data = df, aes(x = CumulativeShareCategories, y = CumulativeShareVa
     panel.border = element_rect(color = "black", fill = NA, size = 1)  # Add a box
   )
 print(p2)
+
+
+### Aufgabe 5 ###
+countries <- c("France","Germany","Austria","Netherlands")
+data_fr <- subset(emission_data_cleaned, Country == "France")
+data_de <- subset(emission_data_cleaned, Country == "Germany")
+data_au <- subset(emission_data_cleaned, Country == "Austria")
+data_ne <- subset(emission_data_cleaned, Country == "Netherlands")
+
+
+# Category names
+sector_names <- unique(data_fr$Sector)
+data_fr$sectornames <- sector_names
+data_de$sectornames <- sector_names
+data_au$sectornames <- sector_names
+data_ne$sectornames <- sector_names
+
+# Create a plot for each category
+p_fr <- ggplot(data_fr, aes(x = year, y = Carbon.dioxide)) +
+  geom_line() +
+  facet_wrap(sectornames ~ ., scales = "free_y", switch = 'y') +
+  labs(title = "CO2 emission over time by sector",
+       x = "Year",
+       y = "CO2 emission")
+
+p_de <- ggplot(data_de, aes(x = year, y = Carbon.dioxide)) +
+  geom_line() +
+  facet_wrap(sectornames ~ ., scales = "free_y", switch = 'y') +
+  labs(title = "CO2 emission over time by sector",
+       x = "Year",
+       y = "CO2 emission")
+
+p_au <- ggplot(data_au, aes(x = year, y = Carbon.dioxide)) +
+  geom_line() +
+  facet_wrap(sectornames ~ ., scales = "free_y", switch = 'y') +
+  labs(title = "CO2 emission over time by sector",
+       x = "Year",
+       y = "CO2 emission")
+
+p_ne <- ggplot(data_ne, aes(x = year, y = Carbon.dioxide)) +
+  geom_line() +
+  facet_wrap(sectornames ~ ., scales = "free_y", switch = 'y') +
+  labs(title = "CO2 emission over time by sector",
+       x = "Year",
+       y = "CO2 emission")
+
 
 
 
