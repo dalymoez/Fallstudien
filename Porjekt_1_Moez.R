@@ -131,7 +131,3 @@ p_ne <- ggplot(data_ne, aes(x = year, y = Carbon.dioxide)) +
        y = "CO2 emission")
 
 
-
-
-
-
