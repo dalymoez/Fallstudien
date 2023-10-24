@@ -20,15 +20,15 @@ data2021 <- subset(emission_data_cleaned, year==2021)
 
 data2021non_sectorial <- data2021[data2021$Sector != "Fuel combustion - sectoral approach",]
 data2021non_sectorial <- subset(data2021non_sectorial,Country!="European Union - 27 countries (from 2020)" )
-agg_data2021non_sectorial <- aggregate(Carbon.dioxide ~ Sector, data = data2021non_sectorial, FUN = sum)
+agg_data2021non_sectorial<- aggregate(Carbon.dioxide ~ Country, data = data2021non_sectorial, FUN = sum)
 # Calculate the mean of the 'CO2' column
 mean_value <- mean(agg_data2021non_sectorial$Carbon.dioxide)
 # Create the ggplot
-p <- ggplot(agg_data2021non_sectorial, aes(x = Sector, y = Carbon.dioxide - mean_value, fill = Carbon.dioxide >= mean_value)) +
+p <- ggplot(agg_data2021non_sectorial, aes(x = Country, y = Carbon.dioxide - mean_value, fill = Carbon.dioxide >= mean_value)) +
   geom_bar(stat = "identity", position = "identity") +
   scale_fill_manual(values = c("pink", "lightblue"), guide = FALSE) +
   labs(x = "Sectors", y = "CO2 Ausstoss") +
-  ggtitle("Unterschied in Ausstoss von CO2 je Sektor") +
+  ggtitle("Unterschied in Ausstoss von CO2 je Land") +
   theme_minimal()
 
 # Add a horizontal line at y = 0
@@ -51,7 +51,7 @@ df <- agg_data2021non_sectorial
 
 
 # Calculate the total sum of values
-total_sum <- sum(df$Value)
+total_sum <- sum(df$Carbon.dioxide)
 
 # Sort the data frame by values in descending order
 df <- df[order(-df$Carbon.dioxide), ]
@@ -65,28 +65,48 @@ gini_index <- ineq(df$Carbon.dioxide, type= "Gini")
 # Calculate the Lorenz curve
 lorenz_curve <- Lc(df$Carbon.dioxide)
 # plot(lorenz_curve) : I find this one unattractive
-
-
-df <- df[order(df$Carbon.dioxide), ]
-
-# Calculate cumulative share of categories and cumulative share of value
-df$CumulativeShareCategories <- cumsum(1:length(df$Carbon.dioxide)) / length(df$Carbon.dioxide)
-df$CumulativeShareValue <- cumsum(df$Carbon.dioxide) / sum(df$Carbon.dioxide)
-
-# Create a Lorenz curve plot using ggplot2
-p2 <- ggplot(data = df, aes(x = CumulativeShareCategories, y = CumulativeShareValue)) +
-  geom_line() +
-  geom_abline(intercept = 0, slope = 1/8 , linetype = "dashed", color = "red") +  # Add the diagonal line
-  labs(x = "Cumulative Share of sectors", y = "Cumulative Share of CO2 emissions") +
-  ggtitle("Lorenz Curve")+
-  theme(
-    plot.title = element_text(size = 16, hjust = 0.5),  # Set title size and center it
-    panel.border = element_rect(color = "black", fill = NA, size = 1)  # Add a box
-  )
-print(p2)
-
+plot(lorenz_curve)
+# 
+# df <- df[order(df$Carbon.dioxide), ]
+# 
+# # Calculate cumulative share of categories and cumulative share of value
+# df$CumulativeShareCategories <- cumsum(1:length(df$Carbon.dioxide)) / length(df$Carbon.dioxide)
+# df$CumulativeShareValue <- cumsum(df$Carbon.dioxide) / sum(df$Carbon.dioxide)
+# 
+# # Create a Lorenz curve plot using ggplot2
+# p2 <- ggplot(data = df, aes(x = CumulativeShareCategories, y = CumulativeShareValue)) +
+#   geom_line() +
+#   geom_abline(intercept = 0, slope = 1/15 , linetype = "dashed", color = "red") +  # Add the diagonal line
+#   labs(x = "Cumulative Share of sectors", y = "Cumulative Share of CO2 emissions") +
+#   ggtitle("Lorenz Curve")+
+#   theme(
+#     plot.title = element_text(size = 15, hjust = 0.5),  # Set title size and center it
+#     panel.border = element_rect(color = "black", fill = NA, size = 1)  # Add a box
+#   )
+# print(p2)
+# 
+# 
+# p2 <- ggplot(data = df, aes(x = CumulativeShareCategories, y = CumulativeShareValue)) +
+#   geom_line() +
+#   geom_abline(intercept = 0, slope = 1/8, linetype = "dashed", color = "red") +
+#   labs(x = "Cumulative Share of sectors", y = "Cumulative Share of CO2 emissions") +
+#   ggtitle("Lorenz Curve") +
+#   theme(
+#     plot.title = element_text(size = 16, hjust = 0.5),
+#     panel.border = element_rect(color = "black", fill = NA, size = 1),
+#   ) +
+#   scale_x_continuous(expand = expansion(add = c(0, 0.02))) +  # Expand x-axis limits
+#   scale_y_continuous(expand = expansion(add = c(0, 0.02))) +  # Expand y-axis limits
+#   coord_cartesian(xlim = c(0, 1), ylim = c(0, 1))  # Set the axis limits
+# 
+# print(p2)
 
 ### Aufgabe 5 ###
+
+
+
+
+
 countries <- c("France","Germany","Austria","Netherlands")
 data_fr <- subset(emission_data_cleaned, Country == "France")
 data_de <- subset(emission_data_cleaned, Country == "Germany")
@@ -130,4 +150,4 @@ p_ne <- ggplot(data_ne, aes(x = year, y = Carbon.dioxide)) +
        x = "Year",
        y = "CO2 emission")
 
-
+#rtiugheruzhe
