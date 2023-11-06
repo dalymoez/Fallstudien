@@ -1,0 +1,74 @@
+##################################################
+########## Fallstudien 1 Projekt 2 ##############
+################################################
+
+#Pakete
+library(ggplot2)
+library(ggplot)
+
+
+#Daten einladen
+
+Konzentration_data <- read.table("C:/Users/natha/Documents/Daten_anonymisiert.xlsx", header= T, sep = ",")
+
+
+# Shapiro- Wilk Test um zu testen ob die Daten normalverteilt sind
+
+
+
+##########################################################################################
+##################### Bearbeitungszeiten untersuchen ##################################### 
+# Aufgabenstellung: Unterscheiden sich die Bearbeitungszeiten zwischen verschiedenen #####
+# Teilgruppen der Teilnehmer*innen? ######################################################
+########################################################################################## 
+
+# Wa sist mit stärvariablen??? müssen wir das irgenwie beachten? nein waren ja alle gleich oder?
+
+
+# zwei erhebungen: 1x im raum mit studis, einmal anderer raum mitarbeitende, wie damit umgehen?
+
+# hier haben wir eine Binomialverteilung, oder? relevant für uns?
+# testen wir einseitig oder zweiseitig? 
+
+# Ich glaube zweiseitg, weil wir ja generell wissen wollen ob es einen Unterschied gibt
+# hier dann mittelwerte als prüfgröße verwenden?
+
+# Geschlecht: Test 1 (Welch's test ungepaart?)
+# Geschlecht: Test 2 (Welch's test ungepaart?)
+
+# Touchpad: Test 1 (Welch's test ungepaart?)
+# Touchpad: Test 2 (Welch's test ungepaart?)
+
+# Müdigkeit: Test 1 (Welch's test ungepaart?)
+# Müdigkeit: Test 2 (Welch's test ungepaart?)
+
+#####################################################################################################
+########################Einfluss akustischer St?rung ################################################
+# Aufgabenstellung: Ist der Konzentrationsscore niedriger, wenn die Konzentration durch #############
+# akustische Einfluesse gestoert wird? Ist die Bearbeitungszeit hoeher, wenn die Konzentration durch ###
+# akustische Einfluesse gestoert wird? ################################################################
+#####################################################################################################
+  
+
+# gepaarter t-Test/welch's test: Unterschied zwischen GU und UG Test Merkmal Konzentrationsscore
+# gepaarter t-Test/welch's test: Unterschied zwischen GU und UG Test Merkmal Bearbeitungszeit
+
+
+###############################################################################################
+################# Akustische Stoerung im Detail ################################################
+# Aufgabenstellung: Unterscheidet sich der Einfluss der akustischen Einfluesse zwischen ######## 
+# den verschiedenen Teilgruppen der Teilnehmer*innen? #########################################
+###############################################################################################
+
+
+
+
+###############################################################################################
+############# Mitarbeitende vs Studierende ####################################################
+# Sind die Mitarbeiter*innen den Studierenden in ihrer Konzentrationsleistung überlegen? ######
+###############################################################################################
+
+
+
+
+
